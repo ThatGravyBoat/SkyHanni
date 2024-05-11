@@ -195,8 +195,8 @@ object RenderUtils {
 
     fun getViewerPos(partialTicks: Float) = exactLocation(Minecraft.getMinecraft().renderViewEntity, partialTicks)
 
-    fun AxisAlignedBB.expandBlock(n: Int = 1) = expand(LorenzVec.expandVector.multiply(n))
-    fun AxisAlignedBB.inflateBlock(n: Int = 1) = expand(LorenzVec.expandVector.multiply(-n))
+    fun AxisAlignedBB.expandBlock(n: Int = 1) = expand(LorenzVec.expandVector * n)
+    fun AxisAlignedBB.inflateBlock(n: Int = 1) = expand(LorenzVec.expandVector * -n)
 
     /**
      * Taken from NotEnoughUpdates under Creative Commons Attribution-NonCommercial 3.0
@@ -1035,8 +1035,7 @@ object RenderUtils {
 
     fun LorenzRenderWorldEvent.exactPlayerEyeLocation(): LorenzVec {
         val player = Minecraft.getMinecraft().thePlayer
-        val add = if (player.isSneaking) LorenzVec(0.0, 1.54, 0.0) else LorenzVec(0.0, 1.62, 0.0)
-        return exactLocation(player).add(add)
+        return exactLocation(player).up(if (player.isSneaking) 1.54 else 1.62)
     }
 
     fun exactLocation(entity: Entity, partialTicks: Float): LorenzVec {

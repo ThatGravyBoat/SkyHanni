@@ -6,9 +6,9 @@ import at.hannibal2.skyhanni.events.LorenzChatEvent
 import at.hannibal2.skyhanni.utils.APIUtil
 import at.hannibal2.skyhanni.utils.ChatUtils
 import at.hannibal2.skyhanni.utils.ConditionalUtils.transformIf
-import at.hannibal2.skyhanni.utils.OSUtils
 import at.hannibal2.skyhanni.utils.StringUtils.getPlayerNameFromChatMessage
 import at.hannibal2.skyhanni.utils.StringUtils.removeColor
+import at.hannibal2.skyhanni.utils.system.OS
 import com.google.gson.JsonArray
 import kotlinx.coroutines.launch
 import net.minecraft.event.ClickEvent
@@ -147,7 +147,7 @@ class Translator {
             coroutineScope.launch {
                 val translation = getTranslationFromEnglish(message, language)
                 ChatUtils.chat("Copied translation to clipboard: §f$translation")
-                OSUtils.copyToClipboard(translation)
+                OS.copyToClipboard(translation)
             }
         }
 
